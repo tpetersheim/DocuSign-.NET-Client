@@ -112,6 +112,7 @@
     <Compile Include="RequestInfo.cs" />
     <Compile Include="ResponseInfo.cs" />
     <Compile Include="RestSettings.cs" />
+    <Compile Include="StringExtensions.cs" />
     <Compile Include="Tab.cs" />
     <Compile Include="Template.cs" />
     <Compile Include="TextTab.cs" />
