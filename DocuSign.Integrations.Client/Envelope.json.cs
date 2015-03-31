@@ -686,21 +686,37 @@ namespace DocuSign.Integrations.Client
         //public RoleTab[] titleTabs { get; set; }
         //public RoleTab[] companyTabs { get; set; }
         //public RoleTab[] dateSignedTabs { get; set; }
-        //public RoleTab[] checkboxTabs { get; set; }
+        public RoleCheckboxTab[] checkboxTabs { get; set; }
         //public RoleTab[] signerAttachmentTabs { get; set; }
     }
 
     /// <summary>
-    /// RoleTabs
+    /// RoleTab
     /// </summary>
     [Serializable]
-    public class RoleTextTab
+    public class RoleTab
     {
         public string tabLabel { get; set; }
+    }
+
+    /// <summary>
+    /// RoleTextTab
+    /// </summary>
+    [Serializable]
+    public class RoleTextTab : RoleTab
+    {
         public string value { get; set; }
     }
 
     /// <summary>
+    /// RoleCheckboxTab
+    /// </summary>
+    [Serializable]
+    public class RoleCheckboxTab : RoleTab
+    {
+        public bool selected { get; set; }
+    }
+
     /// Used for submitting for RESTAPI
     /// </summary>
     [Serializable]
