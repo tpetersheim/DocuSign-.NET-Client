@@ -717,6 +717,7 @@ namespace DocuSign.Integrations.Client
         public bool selected { get; set; }
     }
 
+    /// <summary>
     /// Used for submitting for RESTAPI
     /// </summary>
     [Serializable]
@@ -730,7 +731,7 @@ namespace DocuSign.Integrations.Client
         public Tab[] titleTabs { get; set; }
         public Tab[] companyTabs { get; set; }
         public Tab[] dateSignedTabs { get; set; }
-        public Tab[] checkboxTabs { get; set; }
+        public CheckboxTab[] checkboxTabs { get; set; }
         public Tab[] signerAttachmentTabs { get; set; }
     }
 
