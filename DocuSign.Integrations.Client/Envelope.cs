@@ -154,6 +154,21 @@ namespace DocuSign.Integrations.Client
         public string TemplateId { get; set; }
 
         /// <summary>
+        /// Gets of sets auto navigation
+        /// </summary>
+        public bool? AutoNavigation { get; set; }
+
+        /// <summary>
+        /// Debug Logger interface to handle exceptions
+        /// </summary>
+        public IDebugLogger DebugLogger { get; set; }
+
+        public Envelope()
+        {
+            AutoNavigation = null;
+        }
+
+        /// <summary>
         /// Gets the signed pdf when its completed from service
         /// </summary>
         /// <param name="envelopeId">The envelopeId for this envelope</param>
@@ -196,6 +211,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
+                    DebugLogger.LogException(ex);
                     return null;
                 }
 
@@ -253,6 +269,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
+                    DebugLogger.LogException(ex);
                     return null;
                 }
 
@@ -323,6 +340,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
+                    DebugLogger.LogException(ex);
                     return false;
                 }
 
@@ -359,7 +377,7 @@ namespace DocuSign.Integrations.Client
 
                 builder.Request = req;
                 builder.Proxy = this.Proxy;
-                
+
                 RequestBody rb = new RequestBody();
                 JsonSerializerSettings settings = new JsonSerializerSettings();
                 settings.NullValueHandling = NullValueHandling.Ignore;
@@ -385,6 +403,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
+                    DebugLogger.LogException(ex);
                     return false;
                 }
 
@@ -436,6 +455,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
+                    DebugLogger.LogException(ex);
                     return null;
                 }
 
@@ -462,7 +482,7 @@ namespace DocuSign.Integrations.Client
                 req.HttpMethod = "GET";
                 req.LoginEmail = Login.Email;
                 req.LoginPassword = Login.Password;
-                req.ApiPassword = Login.ApiPassword; 
+                req.ApiPassword = Login.ApiPassword;
                 req.DistributorCode = RestSettings.Instance.DistributorCode;
                 req.DistributorPassword = RestSettings.Instance.DistributorPassword;
                 req.IntegratorKey = RestSettings.Instance.IntegratorKey;
@@ -488,6 +508,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
+                    DebugLogger.LogException(ex);
                     return false;
                 }
 
@@ -538,7 +559,7 @@ namespace DocuSign.Integrations.Client
                 if (response.StatusCode == HttpStatusCode.Created)
                 {
                     this.ParseCreateResponse(response);
-                    if (Status == "sent")
+                    if (Status == EnvelopeStatusEnum.sent)
                     {
                         GetRecipientView();
                     }
@@ -558,6 +579,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
+                    DebugLogger.LogException(ex);
                     return false;
                 }
 
@@ -622,6 +644,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
+                    DebugLogger.LogException(ex);
                     return false;
                 }
 
@@ -687,6 +710,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
+                    DebugLogger.LogException(ex);
                     return false;
                 }
 
@@ -780,6 +804,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
+                    DebugLogger.LogException(ex);
                     return false;
                 }
 
@@ -836,6 +861,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
+                    DebugLogger.LogException(ex);
                     return false;
                 }
 
@@ -884,6 +910,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
+                    DebugLogger.LogException(ex);
                     return false;
                 }
 
@@ -939,6 +966,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
+                    DebugLogger.LogException(ex);
                     return false;
                 }
 
@@ -971,9 +999,11 @@ namespace DocuSign.Integrations.Client
                 env.recipients = this.Recipients;
                 env.templateRoles = this.TemplateRoles;
                 env.carbonCopies = this.CarbonCopies;
-                env.status = this.Status;
+                env.status = this.Status.ToString();
                 env.templateId = this.TemplateId;
                 env.compositeTemplates = this.CompositeTemplates;
+                if (this.AutoNavigation != null)
+                    env.autoNavigation = this.AutoNavigation.ToString();
 
                 // documents information...
                 var docs = new List<Document>();
@@ -998,6 +1028,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
+                    DebugLogger.LogException(ex);
                     return string.Empty;
                 }
 
@@ -1053,6 +1084,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
+                    DebugLogger.LogException(ex);
                     return DateTime.MinValue;
                 }
 
@@ -1136,6 +1168,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
+                    DebugLogger.LogException(ex);
                     return null;
                 }
 
@@ -1181,7 +1214,7 @@ namespace DocuSign.Integrations.Client
 
                     sb.AppendFormat(", \"voidedReason\":\"{0}\"", voidedReason);
                 }
-                    
+
                 sb.Append("}");
 
                 rb.Text = sb.ToString();
@@ -1209,6 +1242,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
+                    DebugLogger.LogException(ex);
                     return false;
                 }
 
@@ -1314,6 +1348,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
+                    DebugLogger.LogException(ex);
                     return null;
                 }
 
@@ -1415,6 +1450,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
+                    DebugLogger.LogException(ex);
                     return false;
                 }
 
@@ -1631,6 +1667,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
+                    DebugLogger.LogException(ex);
                     return false;
                 }
 
@@ -1700,6 +1737,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
+                    DebugLogger.LogException(ex);
                     return string.Empty;
                 }
 
@@ -1768,6 +1806,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
+                    DebugLogger.LogException(ex);
                     return false;
                 }
 
@@ -1826,6 +1865,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
+                    DebugLogger.LogException(ex);
                     return false;
                 }
 

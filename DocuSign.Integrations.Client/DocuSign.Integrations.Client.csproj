@@ -106,6 +106,7 @@
     <Compile Include="EnvelopeInfoXmlTextReader.cs" />
     <Compile Include="EnvelopeStatus.cs" />
     <Compile Include="Error.json.cs" />
+    <Compile Include="IDebugLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestBody.cs" />
     <Compile Include="RequestBuilder.cs" />
