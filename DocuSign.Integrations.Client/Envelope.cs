@@ -129,7 +129,7 @@ namespace DocuSign.Integrations.Client
         /// <summary>
         /// Status like "Draft", "Complete" etc.
         /// </summary>
-        public string Status { get; set; }
+        public EnvelopeStatusEnum Status { get; set; }
 
         /// <summary>
         /// Gets or sets the api error
@@ -1036,7 +1036,7 @@ namespace DocuSign.Integrations.Client
                 }
                 JObject json = JObject.Parse(response.ResponseText);
 
-                this.Status = (string)json["status"];
+                this.Status = ((string)json["status"]).ToEnum<EnvelopeStatusEnum>();
                 this.EmailSubject = (string)json["emailSubject"];
                 this.EmailBlurb = (string)json["emailBlurb"];
 
@@ -1168,7 +1168,8 @@ namespace DocuSign.Integrations.Client
                 sb.Append("{");
                 sb.AppendFormat("\"status\":\"{0}\"", this.Status);
 
-                if (this.Status == "voided") {
+                if (this.Status == EnvelopeStatusEnum.voided)
+                {
 
                     if (String.IsNullOrEmpty(voidedReason))
                         throw new ArgumentException("The voided reason is required to change status to voided.");
@@ -1989,6 +1990,7 @@ namespace DocuSign.Integrations.Client
 
                 this.EnvelopeId = (string)json["envelopeId"];
                 this.Url = (string)json["uri"];
+                this.Status = ((string)json["status"]).ToEnum<EnvelopeStatusEnum>();
             }
         }
 
@@ -2219,6 +2221,20 @@ namespace DocuSign.Integrations.Client
                 throw;
             }
         }
+    }
+
+    public enum EnvelopeStatusEnum
+    {
+        voided,
+        created,
+        deleted,
+        sent,
+        delivered,
+        signed,
+        completed,
+        declined,
+        timedout,
+        processing
     }
 }
 
