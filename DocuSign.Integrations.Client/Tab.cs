@@ -64,7 +64,7 @@ namespace DocuSign.Integrations.Client
 			{
 				// if it's white space - return null
 				//
-                if (String.IsNullOrEmpty(_anchorString) || _anchorString.Trim() == String.Empty)
+                if (String.IsNullOrWhiteSpace(_anchorString))
                 {
                     return null;
                 }
@@ -150,7 +150,7 @@ namespace DocuSign.Integrations.Client
 		/// <summary>
 		/// Place this tag on the document in a location where the recipient can select a yes/no (on/off) type option.
 		/// </summary>
-		public List<Tab> checkboxTabs { get; set; }
+        public List<CheckboxTab> checkboxTabs { get; set; }
         /// <summary>
         /// Place this tag on the document to allow signer to add attachments to the signed doc
         /// </summary>
@@ -160,17 +160,17 @@ namespace DocuSign.Integrations.Client
 		/// Default constructor
 		/// </summary>
         public TabCollection()
-		{
-			this.signHereTabs = new List<Tab>();
-			this.initialHereTabs = new List<Tab>();
-			this.fullNameTabs = new List<Tab>();
-			this.emailTabs = new List<Tab>();
+        {
+            this.signHereTabs = new List<Tab>();
+            this.initialHereTabs = new List<Tab>();
+            this.fullNameTabs = new List<Tab>();
+            this.emailTabs = new List<Tab>();
             this.textTabs = new List<TextTab>();
-			this.titleTabs = new List<Tab>();
-			this.companyTabs = new List<Tab>();
-			this.dateSignedTabs = new List<Tab>();
-			this.checkboxTabs = new List<Tab>();
+            this.titleTabs = new List<Tab>();
+            this.companyTabs = new List<Tab>();
+            this.dateSignedTabs = new List<Tab>();
+            this.checkboxTabs = new List<CheckboxTab>();
             this.signerAttachmentTabs = new List<Tab>();
-		}
+        }
 	}
 }
