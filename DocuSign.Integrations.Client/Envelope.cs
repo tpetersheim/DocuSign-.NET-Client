@@ -132,6 +132,11 @@ namespace DocuSign.Integrations.Client
         public EnvelopeStatusEnum Status { get; set; }
 
         /// <summary>
+        /// Status date and time from envelope creation
+        /// </summary>
+        public DateTime StatusDateTime { get; set; }
+
+        /// <summary>
         /// Gets or sets the api error
         /// </summary>
         public Error RestError { get; private set; }
@@ -1991,6 +1996,7 @@ namespace DocuSign.Integrations.Client
                 this.EnvelopeId = (string)json["envelopeId"];
                 this.Url = (string)json["uri"];
                 this.Status = ((string)json["status"]).ToEnum<EnvelopeStatusEnum>();
+                this.StatusDateTime = (DateTime)json["statusDateTime"];
             }
         }
 
