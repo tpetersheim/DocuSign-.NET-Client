@@ -800,9 +800,17 @@ namespace DocuSign.Integrations.Client
     }
 
     [Serializable]
+    public class InlineTemplate
+    {
+        public int sequence { get; set; }
+        public Recipients recipients { get; set; }
+    }
+
+    [Serializable]
     public class CompositeTemplate
     {
         public string compositeTemplateId { get; set; }
         public ServerTemplate[] serverTemplates { get; set; }
+        public InlineTemplate[] inlineTemplates { get; set; }
     }
 }
