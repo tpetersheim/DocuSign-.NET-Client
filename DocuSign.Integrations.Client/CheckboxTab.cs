@@ -10,6 +10,6 @@ namespace DocuSign.Integrations.Client
         /// <summary>
         /// This element specifies whether or not the checkbox is checked.
         /// </summary>
-        public bool selected { get; set; }
+        public bool? selected { get; set; }
     }
 }

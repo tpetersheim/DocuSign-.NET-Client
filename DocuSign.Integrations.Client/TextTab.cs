@@ -32,18 +32,18 @@ namespace DocuSign.Integrations.Client
         /// <summary>
         /// Optional element for field markup. When set to true, enables field markup for the field. 
         /// </summary>
-        public bool shared { get; set; }
+        public bool? shared { get; set; }
 
         /// <summary>
         /// Optional element for field markup. When set to true it requires the signer to initial when 
         /// they modify a shared field. 
         /// </summary>
-        public bool requireInitialOnSharedChange { get; set; }
+        public bool? requireInitialOnSharedChange { get; set; }
 
         /// <summary>
         /// ???? $TODO: Workout what this is
         /// </summary>
-        public bool requireAll { get; set; }
+        public bool? requireAll { get; set; }
 
         /// <summary>
         /// This element specifies the value of the tab.
@@ -53,7 +53,7 @@ namespace DocuSign.Integrations.Client
         /// <summary>
         /// If true, the Signer cannot change the data in the tab.
         /// </summary>
-        public bool locked { get; set; }
+        public bool? locked { get; set; }
 
         /// <summary>
         /// Optional element. If true the field appears normally while the recipient is adding or modifying 
@@ -62,25 +62,25 @@ namespace DocuSign.Integrations.Client
         /// the sender through the Form Data link in the DocuSign Console. This setting applies only to text 
         /// boxes and does not affect  
         /// </summary>
-        public bool concealValueOnDocument { get; set; }
+        public bool? concealValueOnDocument { get; set; }
 
         /// <summary>
         /// Disables the auto sizing of single line text boxes in the signing screen when the signer enters 
         /// data. If disabled users will only be able enter as much data as the text box can hold. By default 
         /// this is false. This property only affects single line text boxes.
         /// </summary>
-        public bool disableAutoSize { get; set; }
+        public bool? disableAutoSize { get; set; }
 
         /// <summary>
         /// Optional element. Used only when working with template tabs. If true, the attributes of the tab 
         /// cannot be changed by the sender
         /// </summary>
-        public bool templateLocked { get; set; }
+        public bool? templateLocked { get; set; }
 
         /// <summary>
         /// Optional element. Used only when working with template tabs. If true, the tab cannot be removed 
         /// by the sender.
         /// </summary>
-        public bool templateRequired { get; set; }
+        public bool? templateRequired { get; set; }
     }
 }

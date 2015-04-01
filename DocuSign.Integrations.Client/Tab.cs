@@ -29,27 +29,27 @@ namespace DocuSign.Integrations.Client
 		/// <summary>
 		/// Page number where this tab shows in the document
 		/// </summary>
-		public int pageNumber { get; set; }
+		public int? pageNumber { get; set; }
 		/// <summary>
 		/// Document where this tab shows
 		/// </summary>
-		public int documentId { get; set; }
+		public int? documentId { get; set; }
 		/// <summary>
 		/// X pixels
 		/// </summary>
-		public int xPosition { get; set; }
+		public int? xPosition { get; set; }
 		/// <summary>
 		/// Y pixels
 		/// </summary>
-		public int yPosition { get; set; }
+		public int? yPosition { get; set; }
 		/// <summary>
 		/// Height in pixels
 		/// </summary>
-		public int height  { get; set; }
+		public int? height  { get; set; }
 		/// <summary>
 		/// Width in pixels
 		/// </summary>
-		public int width { get; set; }
+		public int? width { get; set; }
 		/// <summary>
 		/// Tab Label for text tabs
 		/// </summary>
@@ -80,11 +80,11 @@ namespace DocuSign.Integrations.Client
         /// <summary>
         /// Int X offset of the tab
         /// </summary>
-        public int anchorXOffset { get; set; }
+        public int? anchorXOffset { get; set; }
         /// <summary>
         /// Int Y offset of the tab
         /// </summary>
-        public int anchorYOffset { get; set; }
+        public int? anchorYOffset { get; set; }
         /// <summary>
         /// Units the tab offset is measured in
         /// </summary>
@@ -102,7 +102,7 @@ namespace DocuSign.Integrations.Client
         /// <summary>
         ///If true, the signer is required to fill out this tab.
         /// <s/ummary>
-        public bool required { get; set; }
+        public bool? required { get; set; }
 
         /// <summary>
         /// The recipient for the tab
