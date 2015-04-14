@@ -365,13 +365,13 @@ namespace RestClientUnitTests
             Assert.AreEqual(target.Recipients.recipientCount, "3");
             Assert.AreEqual(target.Recipients.signers[0].email, "test1@docusign20154.onmicrosoft.com");
             Assert.AreEqual(target.Recipients.signers[0].name, "Test One");
-            Assert.AreEqual(target.Recipients.signers[0].status, "sent");
+            Assert.AreEqual(target.Recipients.signers[0].status, RecipientStatusEnum.sent.ToString());
             Assert.AreEqual(target.Recipients.signers[1].email, "test2@docusign20154.onmicrosoft.com");
             Assert.AreEqual(target.Recipients.signers[1].name, "Test Two");
-            Assert.AreEqual(target.Recipients.signers[1].status, "created");
+            Assert.AreEqual(target.Recipients.signers[1].status, RecipientStatusEnum.created.ToString());
             Assert.AreEqual(target.Recipients.signers[2].email, "test3@docusign20154.onmicrosoft.com");
             Assert.AreEqual(target.Recipients.signers[2].name, "Test Three");
-            Assert.AreEqual(target.Recipients.signers[2].status, "created");
+            Assert.AreEqual(target.Recipients.signers[2].status, RecipientStatusEnum.created.ToString());
         }
     }
 }

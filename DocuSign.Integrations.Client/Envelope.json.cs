@@ -228,7 +228,19 @@ namespace DocuSign.Integrations.Client
         /// <summary>
         /// Currently envelope status with respect to the recipient
         /// </summary>
-        public string status { get; set; }
+        public RecipientStatusEnum status { get; set; }
+    }
+
+    public enum RecipientStatusEnum
+    {
+        created,
+        sent,
+        delivered,
+        signed,
+        declined,
+        completed,
+        faxpending,
+        autoresponded
     }
 
     /// <summary>
