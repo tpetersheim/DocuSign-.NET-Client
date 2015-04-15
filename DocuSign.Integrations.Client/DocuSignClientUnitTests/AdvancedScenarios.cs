@@ -63,7 +63,7 @@ namespace RestClientUnitTests
             Assert.IsTrue(envelope.UpdateRecipients(recipients, false));
             Assert.IsNull(template.RestError);
             // send envelope
-            envelope.Status = "sent";
+            envelope.Status = EnvelopeStatusEnum.sent;
             Assert.IsTrue(envelope.UpdateStatus());
             Assert.IsNull(template.RestError);
         }
@@ -116,7 +116,7 @@ namespace RestClientUnitTests
         {
             var envelope = new Envelope { Login = _account };
             byte[] doc1 = { 36, 45, 34, 67, 121, 87, 99, 32, 32, 32, 54, 54, 55, 56, 32 };
-            envelope.Status = "sent";
+            envelope.Status = EnvelopeStatusEnum.sent;
             var signers = new List<Signer>();
             signers.Add(new Signer { email = _account.Email, name = _account.AccountName, recipientId = "1", routingOrder = "1" });
             envelope.Recipients = new Recipients { signers = signers.ToArray() };
@@ -137,7 +137,7 @@ namespace RestClientUnitTests
             var envelope = new Envelope { Login = _account };
             byte[] byteArray = { 36, 45, 34, 67, 121, 87, 99, 32, 32, 32, 54, 54, 55, 56, 32 };
             var doc1 = new MemoryStream(byteArray);
-            envelope.Status = "sent";
+            envelope.Status = EnvelopeStatusEnum.sent;
             var signers = new List<Signer>();
             signers.Add(new Signer { email = _account.Email, name = _account.AccountName, recipientId = "1", routingOrder = "1" });
             envelope.Recipients = new Recipients { signers = signers.ToArray() };
@@ -189,12 +189,12 @@ namespace RestClientUnitTests
             Assert.IsNull(envelope.RestError);
             Assert.IsTrue(envelope.AddEmailInformation("DocuSign Client Tests Message", "DocuSign Client Tests Message"));
             Assert.IsNull(envelope.RestError);
-            var time = envelope.GetStatus(envelope.EnvelopeId);
+            var success = envelope.GetStatus(envelope.EnvelopeId);
             Assert.AreEqual("created", envelope.Status);
             // envelope was created very recently...
-            Assert.IsTrue(DateTime.Now.Subtract(time).Ticks < 10000);
+            Assert.IsTrue(DateTime.Now.Subtract(envelope.StatusChangedDateTime).Ticks < 10000);
             // send envelope
-            envelope.Status = "sent";
+            envelope.Status = EnvelopeStatusEnum.sent;
             envelope.UpdateStatus();
         }
 
@@ -258,7 +258,7 @@ namespace RestClientUnitTests
             Assert.IsTrue(envelope.Create(doc1, "test-self-signed.doc"));
             Assert.IsNull(envelope.RestError);
             // send it
-            envelope.Status = "sent";
+            envelope.Status = EnvelopeStatusEnum.sent;
             Assert.IsTrue(envelope.UpdateStatus());
             Assert.IsNull(envelope.RestError);
             // get embedded signing views for 2 recipients

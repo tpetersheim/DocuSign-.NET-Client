@@ -233,6 +233,7 @@ namespace DocuSign.Integrations.Client
 
     public enum RecipientStatusEnum
     {
+        none,
         created,
         sent,
         delivered,

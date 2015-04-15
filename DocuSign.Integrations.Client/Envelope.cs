@@ -137,6 +137,16 @@ namespace DocuSign.Integrations.Client
         public DateTime StatusDateTime { get; set; }
 
         /// <summary>
+        /// Status changed date and time from envelope get status
+        /// </summary>
+        public DateTime StatusChangedDateTime { get; set; }
+
+        /// <summary>
+        /// Completed date and time from envelope get status
+        /// </summary>
+        public DateTime CompletedDateTime { get; set; }
+
+        /// <summary>
         /// Gets or sets the api error
         /// </summary>
         public Error RestError { get; private set; }
@@ -1022,7 +1032,7 @@ namespace DocuSign.Integrations.Client
         /// </summary>
         /// <param name="envelopeId">The envelopeId for this envelope</param>
         /// <returns>Date/Time when the status was set</returns>
-        public DateTime GetStatus(string envelopeId)
+        public bool GetStatus(string envelopeId)
         {
             try
             {
@@ -1049,15 +1059,17 @@ namespace DocuSign.Integrations.Client
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
                     this.ParseErrorResponse(response);
-                    return DateTime.MinValue;
+                    return false;
                 }
                 JObject json = JObject.Parse(response.ResponseText);
 
                 this.Status = ((string)json["status"]).ToEnum<EnvelopeStatusEnum>();
+                this.CompletedDateTime = (DateTime)json["completedDateTime"];
+                this.StatusChangedDateTime = (DateTime)json["statusChangedDateTime"];
                 this.EmailSubject = (string)json["emailSubject"];
                 this.EmailBlurb = (string)json["emailBlurb"];
 
-                return (DateTime)json["statusChangedDateTime"];
+                return true;
 
             }
             catch (Exception ex)
@@ -1065,7 +1077,7 @@ namespace DocuSign.Integrations.Client
                 if (ex is WebException || ex is NotSupportedException || ex is InvalidOperationException || ex is ProtocolViolationException)
                 {
                     // Once we get the debugging logger integrated into this project, we should write a log entry here
-                    return DateTime.MinValue;
+                    return false;
                 }
 
                 throw;
@@ -2243,6 +2255,7 @@ namespace DocuSign.Integrations.Client
 
     public enum EnvelopeStatusEnum
     {
+        none,
         voided,
         created,
         deleted,
