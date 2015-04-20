@@ -229,6 +229,9 @@ namespace DocuSign.Integrations.Client
         /// Currently envelope status with respect to the recipient
         /// </summary>
         public RecipientStatusEnum status { get; set; }
+        /// <summary>
+        /// Collection of custom fields (name/value)
+        /// </summary>
     }
 
     public enum RecipientStatusEnum
@@ -683,6 +686,9 @@ namespace DocuSign.Integrations.Client
         /// The signer's tabs
         /// </summary>
         public RoleTabs tabs { get; set; }
+        /// <summary>
+        /// Collection of custom fields (name/value)
+        /// </summary>
     }
 
     /// <summary>
